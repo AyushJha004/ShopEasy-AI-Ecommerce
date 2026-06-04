@@ -26,23 +26,23 @@ The application provides product catalog management, user authentication, shoppi
 
 ### Login Page
 
-![Login](screenshots/login.png)
+![Login](https://github.com/AyushJha004/ShopEasy-AI-Ecommerce/blob/6e89e4ab5e7fcc88a4b1714beb8a49091ad30a68/login.png)
 
 ### Product Catalog
 
-![Catalog](screenshots/catalog.png)
+![Catalog](https://github.com/AyushJha004/ShopEasy-AI-Ecommerce/blob/6e89e4ab5e7fcc88a4b1714beb8a49091ad30a68/catalog.png)
 
 ### Product Details
 
-![Product Details](screenshots/product-details.png)
+![Product Details](https://github.com/AyushJha004/ShopEasy-AI-Ecommerce/blob/6e89e4ab5e7fcc88a4b1714beb8a49091ad30a68/product-details.png)
 
 ### Shopping Cart
 
-![Cart](screenshots/cart.png)
+![Cart](https://github.com/AyushJha004/ShopEasy-AI-Ecommerce/blob/6e89e4ab5e7fcc88a4b1714beb8a49091ad30a68/cart.png)
 
 ### Customer Reviews
 
-![Reviews](screenshots/reviews.png)
+![Reviews](https://github.com/AyushJha004/ShopEasy-AI-Ecommerce/blob/6e89e4ab5e7fcc88a4b1714beb8a49091ad30a68/reviews.png)
 
 ---
 
