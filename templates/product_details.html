@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - ShopEasy</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo" onclick="window.location.href='/home'">
+                <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="38" height="38" rx="10" fill="url(#lg1)"/><defs><linearGradient id="lg1" x1="0" y1="0" x2="38" y2="38" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#7C3AED"/><stop offset="100%" stop-color="#DB2777"/></linearGradient></defs><path d="M13 17 Q13 12 19 12 Q25 12 25 17" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/><rect x="11" y="17" width="16" height="12" rx="2.5" fill="white" opacity="0.92"/><line x1="19" y1="20" x2="19" y2="26" stroke="#7C3AED" stroke-width="1.8" stroke-linecap="round"/><line x1="16" y1="23" x2="22" y2="23" stroke="#7C3AED" stroke-width="1.8" stroke-linecap="round"/></svg>
+                <h1>ShopEasy</h1>
+            </div>
+            
+            <div class="nav-search">
+                <input type="text" id="searchInput" placeholder="Search ShopEasy.in">
+                <button onclick="search()">🔍</button>
+            </div>
+            
+            <div class="nav-links">
+                <a href="/home">Home</a>
+                <a href="/about">About</a>
+                <a href="#" id="cartLink">🛒 Cart (<span id="cartCount">0</span>)</a>
+                <a href="#" id="logoutBtn">Logout</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="product-detail-container">
+            <div id="loadingSpinner" class="loading">Loading product...</div>
+            <div id="productContent" style="display:none;">
+                <div class="product-detail">
+                    <div class="product-detail-image-section">
+                        <img id="productImage" class="product-detail-image" alt="Product">
+                    </div>
+                    
+                    <div class="product-detail-info">
+                        <div class="product-detail-brand">
+                            Brand: <a href="#" id="productBrand">-</a>
+                        </div>
+                        
+                        <h1 id="productName">Product Name</h1>
+                        
+                        <div class="product-detail-rating">
+                            <span class="detail-stars" id="productStars">☆☆☆☆☆</span>
+                            <span class="detail-rating-text" id="ratingText">0 ratings</span>
+                        </div>
+                        
+                        <div class="product-detail-price">
+                            <span class="price-label">M.R.P.: </span>
+                            <span class="price-currency">₹</span><span id="productPrice">0</span>
+                        </div>
+                        
+                        <div class="product-detail-description" id="productDescription">
+                            Loading description...
+                        </div>
+                        
+                        <!-- Options Section -->
+                        <div class="product-options" id="productOptions">
+                            <!-- Size Selection for Clothing -->
+                            <div class="option-group" id="sizeGroup" style="display:none;">
+                                <div class="option-label">Select Size:</div>
+                                <select id="sizeSelect" class="option-select">
+                                    <option value="">Choose a size</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Color Selection -->
+                            <div class="option-group" id="colorGroup" style="display:none;">
+                                <div class="option-label">Select Color:</div>
+                                <div class="option-buttons" id="colorButtons"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Buy Box -->
+                        <div class="buy-box">
+                            <div class="buy-box-price">
+                                <span class="price-currency">₹</span><span id="buyBoxPrice">0</span>
+                            </div>
+                            
+                            <div class="stock-status" id="stockStatus">In Stock</div>
+                            
+                            <div class="quantity-selector">
+                                <label for="quantity">Quantity:</label>
+                                <select id="quantity">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                            
+                            <button class="btn-primary" onclick="addToCart()" id="addToCartBtn">Add to Cart</button>
+                            <button class="btn-primary" onclick="buyNow()" style="margin-top:10px;">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Reviews Section -->
+                <div class="reviews-section">
+                    <div class="reviews-header">
+                        <h2>Customer Reviews</h2>
+                        <button class="btn-secondary" onclick="openReviewModal()" style="width:auto;padding:10px 20px;">Write a Review</button>
+                    </div>
+                    <div id="reviewsList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Review Modal -->
+    <div id="reviewModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeReviewModal()">&times;</span>
+            <h3>Write a Review</h3>
+            
+            <form id="reviewForm">
+                <div class="form-group">
+                    <label>Rating</label>
+                    <div class="star-rating">
+                        <span class="star" data-rating="1">★</span>
+                        <span class="star" data-rating="2">★</span>
+                        <span class="star" data-rating="3">★</span>
+                        <span class="star" data-rating="4">★</span>
+                        <span class="star" data-rating="5">★</span>
+                    </div>
+                    <input type="hidden" id="rating" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reviewTitle">Review Title</label>
+                    <input type="text" id="reviewTitle" required placeholder="Great product!">
+                </div>
+                
+                <div class="form-group">
+                    <label for="reviewText">Your Review</label>
+                    <textarea id="reviewText" rows="4" required placeholder="Tell us what you think..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn-primary">Submit Review</button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="/static/js/product_details.js"></script>
+</body>
+</html>

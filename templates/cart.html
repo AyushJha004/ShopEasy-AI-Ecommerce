@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart – ShopEasy</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo" onclick="window.location.href='/home'">
+                <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="38" height="38" rx="10" fill="url(#lg4)"/><defs><linearGradient id="lg4" x1="0" y1="0" x2="38" y2="38" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#7C3AED"/><stop offset="100%" stop-color="#DB2777"/></linearGradient></defs><path d="M13 17 Q13 12 19 12 Q25 12 25 17" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/><rect x="11" y="17" width="16" height="12" rx="2.5" fill="white" opacity="0.92"/><line x1="19" y1="20" x2="19" y2="26" stroke="#7C3AED" stroke-width="1.8" stroke-linecap="round"/><line x1="16" y1="23" x2="22" y2="23" stroke="#7C3AED" stroke-width="1.8" stroke-linecap="round"/></svg>
+                <h1>ShopEasy</h1>
+            </div>
+            <div class="nav-links">
+                <a href="/home">Home</a>
+                <a href="/about">About</a>
+                <a href="#" class="nav-cart-badge active">🛒 Cart</a>
+                <a href="#" id="logoutBtn">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="cart-container">
+            <div class="cart-items" id="cartItems"></div>
+
+            <div class="cart-summary">
+                <h3>Order Summary</h3>
+                <div class="summary-row"><span>Subtotal</span><span id="subtotal">₹0</span></div>
+                <div class="summary-row"><span>GST (18%)</span><span id="tax">₹0</span></div>
+                <div class="summary-row"><span>Delivery</span><span style="color:#06D6A0">Free</span></div>
+                <div class="summary-row total"><span>Total</span><span id="total">₹0</span></div>
+                <button class="btn-primary btn-block" onclick="showCheckoutForm()">Proceed to Checkout →</button>
+                <button class="btn-secondary btn-block" onclick="clearCart()">Clear Cart</button>
+            </div>
+        </div>
+
+        <!-- Checkout Modal -->
+        <div id="checkoutModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeCheckoutModal()">&times;</span>
+                <h3>Complete Your Order</h3>
+
+                <form id="checkoutForm">
+                    <h4>📍 Delivery Address</h4>
+                    <div class="form-group">
+                        <label>Street Address</label>
+                        <input type="text" id="street" required placeholder="123, MG Road">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>City</label>
+                            <input type="text" id="city" required placeholder="Mumbai">
+                        </div>
+                        <div class="form-group">
+                            <label>State</label>
+                            <input type="text" id="state" required placeholder="Maharashtra">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>PIN Code</label>
+                            <input type="text" id="zip" required placeholder="400001">
+                        </div>
+                        <div class="form-group">
+                            <label>Country</label>
+                            <input type="text" id="country" required placeholder="India" value="India">
+                        </div>
+                    </div>
+
+                    <h4>💳 Payment Method</h4>
+                    <div class="form-group">
+                        <select id="paymentMethod" required>
+                            <option value="">Select payment method</option>
+                            <option value="upi">UPI (GPay / PhonePe / Paytm)</option>
+                            <option value="credit_card">Credit Card</option>
+                            <option value="debit_card">Debit Card</option>
+                            <option value="net_banking">Net Banking</option>
+                            <option value="cash_on_delivery">Cash on Delivery</option>
+                        </select>
+                    </div>
+
+                    <div class="checkout-total">
+                        Total Payable: ₹<span id="checkoutTotal">0</span>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Place Order 🎉</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Review Modal -->
+        <div id="reviewModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeReviewModal()">&times;</span>
+                <h3 id="reviewModalTitle">Write a Review</h3>
+                <form id="reviewForm">
+                    <input type="hidden" id="reviewProductId">
+                    <div class="form-group">
+                        <label>Your Rating</label>
+                        <div class="star-rating">
+                            <span class="star" data-rating="1">★</span>
+                            <span class="star" data-rating="2">★</span>
+                            <span class="star" data-rating="3">★</span>
+                            <span class="star" data-rating="4">★</span>
+                            <span class="star" data-rating="5">★</span>
+                        </div>
+                        <input type="hidden" id="rating">
+                    </div>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="reviewTitle" required placeholder="Summarise your experience">
+                    </div>
+                    <div class="form-group">
+                        <label>Review</label>
+                        <textarea id="reviewText" rows="4" required placeholder="What did you like or dislike?"></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Submit Review ⭐</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/cart.js"></script>
+</body>
+</html>

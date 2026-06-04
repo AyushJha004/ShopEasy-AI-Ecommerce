@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEasy – Discover Something Amazing</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo" onclick="window.location.href='/home'">
+                <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="38" height="38" rx="10" fill="url(#lg5)"/><defs><linearGradient id="lg5" x1="0" y1="0" x2="38" y2="38" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#7C3AED"/><stop offset="100%" stop-color="#DB2777"/></linearGradient></defs><path d="M13 17 Q13 12 19 12 Q25 12 25 17" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/><rect x="11" y="17" width="16" height="12" rx="2.5" fill="white" opacity="0.92"/><line x1="19" y1="20" x2="19" y2="26" stroke="#7C3AED" stroke-width="1.8" stroke-linecap="round"/><line x1="16" y1="23" x2="22" y2="23" stroke="#7C3AED" stroke-width="1.8" stroke-linecap="round"/></svg>
+                <h1>ShopEasy</h1>
+            </div>
+
+            <div class="nav-search">
+                <input type="text" id="searchInput" placeholder="Search products, brands, categories...">
+                <button onclick="searchProducts()">🔍</button>
+            </div>
+
+            <div class="nav-links">
+                <a href="/home" class="active">Home</a>
+                <a href="/about">About</a>
+                <a href="#" id="cartLink" class="nav-cart-badge">🛒 <span id="cartCount">0</span></a>
+                <a href="#" id="logoutBtn">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="filter-bar">
+            <span class="filter-bar-label">Browse</span>
+            <button class="category-btn active" data-cat="all" onclick="filterCategory('all', this)">✨ All</button>
+            <button class="category-btn" data-cat="electronics" onclick="filterCategory('electronics', this)">⚡ Electronics</button>
+            <button class="category-btn" data-cat="clothing" onclick="filterCategory('clothing', this)">👕 Fashion</button>
+            <button class="category-btn" data-cat="toys" onclick="filterCategory('toys', this)">🧸 Toys</button>
+            <button class="category-btn" data-cat="art" onclick="filterCategory('art', this)">🎨 Art</button>
+            <button class="category-btn" data-cat="sports" onclick="filterCategory('sports', this)">⚽ Sports</button>
+            <button class="category-btn" data-cat="books" onclick="filterCategory('books', this)">📚 Books</button>
+            <button class="category-btn" data-cat="beauty" onclick="filterCategory('beauty', this)">💄 Beauty</button>
+            <button class="category-btn" data-cat="furniture" onclick="filterCategory('furniture', this)">🛋️ Furniture</button>
+
+            <div style="margin-left:auto;display:flex;align-items:center;gap:8px;">
+                <span class="filter-bar-label">Sort</span>
+                <select id="sortSelect" onchange="applySort()" style="padding:8px 14px;border:1.5px solid var(--border);border-radius:50px;font-size:13px;font-family:Inter,sans-serif;font-weight:500;background:var(--bg);color:var(--text);cursor:pointer;outline:none;">
+                    <option value="default">Default</option>
+                    <option value="price_asc">Price: Low to High</option>
+                    <option value="price_desc">Price: High to Low</option>
+                    <option value="rating_desc">Top Rated</option>
+                    <option value="rating_asc">Lowest Rated</option>
+                    <option value="reviews_desc">Most Reviewed</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="productsContainer" class="products-grid"></div>
+        <div id="loadingSpinner" class="loading">Loading products...</div>
+    </div>
+
+    <script src="/static/js/home.js"></script>
+</body>
+</html>

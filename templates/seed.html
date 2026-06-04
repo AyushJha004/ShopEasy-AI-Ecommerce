@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Seed Products</title>
+    <style>
+        body {
+            font-family: Arial;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        button {
+            padding: 20px 40px;
+            font-size: 18px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover { background: #45a049; }
+        .message { color: white; margin-top: 20px; font-size: 18px; }
+    </style>
+</head>
+<body>
+    <div style="text-align: center;">
+        <button onclick="seed()">🌱 Seed Sample Products</button>
+        <div id="message" class="message"></div>
+    </div>
+    <script>
+        async function seed() {
+            document.getElementById('message').textContent = 'Seeding...';
+            try {
+                const res = await fetch('/api/seed', { method: 'POST' });
+                const data = await res.json();
+                document.getElementById('message').textContent = data.message || 'Done!';
+                setTimeout(() => window.location.href = '/login', 2000);
+            } catch (err) {
+                document.getElementById('message').textContent = 'Error: ' + err.message;
+            }
+        }
+    </script>
+</body>
+</html>

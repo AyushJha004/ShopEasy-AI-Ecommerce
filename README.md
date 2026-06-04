@@ -1,50 +1,95 @@
-# 🛒 ShopEasy – Full Stack E-commerce Web Application
+# Project Summary
 
-A full-stack e-commerce web application built using Flask and MongoDB that allows users to browse products, manage a shopping cart, and place orders.
+- **Overview:** Full-stack e-commerce application combining a Python/Flask backend with a modern Next.js React frontend. Provides product catalog, baskets, orders, user auth, product reviews, comparisons, and AI-powered search/recommendations.
 
-## 🚀 Features
-- User authentication (login/signup)
-- Product listing and browsing
-- Add to cart / remove from cart functionality
-- Order processing system
-- Responsive UI using HTML and CSS
+## Tech Stack
 
-- ## 🛠️ Tech Stack
-- Backend: Flask (Python)
-- Frontend: HTML, CSS
-- Database: MongoDB
-- 
-## 👨‍💻 Contribution
+- **Backend:** Python, Flask
+- **Database:** MongoDB (pymongo)
+- **Data & Utilities:** numpy, redis, python-dotenv, requests
+- **AI / ML:** google-generativeai integration via `utils/ai_service.py`
+- **Frontend:** Next.js (React 19), TypeScript support, Tailwind CSS, Radix UI and other React libraries
 
-This was a group project developed collaboratively as part of coursework.
+## Quick start (developer)
 
-### My Contributions:
-- Implemented backend logic using Flask
-  
-- Designed and integrated MongoDB database
-  
-- Built frontend pages using HTML and CSS
+1. Create and activate a Python virtual environment, then install Python deps:
 
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
 
-### Team Contributions:
-- Designed and integrated MongoDB database
-- Assisted in system design and project planning
-- Collaborated on feature implementation and testing
-- Developed cart and order management functionality
+2. Run backend (development):
 
-- ## ⚙️ Setup Instructions
+```powershell
+python app.py
+# Backend listens on http://localhost:5000 by default
+```
 
-1. Clone the repository:
-   git clone https://github.com/AyushJha004/Ecommerce-Website.git
+3. Install and run frontend (from project root):
 
-2. Navigate to the project folder:
-   cd Ecommerce-Website
+```bash
+pnpm install
+pnpm dev
+# or with npm:
+npm install
+npm run dev
+# Next dev server typically runs on http://localhost:3000
+```
 
-3. Install dependencies:
-   pip install -r requirements.txt
+## Configuration
 
-4. Run the application:
-   python app.py
+This project uses a `.env` file to store runtime configuration (database URI, API keys, etc.). A `.env.example` with placeholders is included at the repo root — copy it and fill in real values before running:
 
-5. Open in browser:
-   http://localhost:5000
+```powershell
+copy .env.example .env
+```
+
+Important environment variables (add these to your local `.env`):
+
+- `MONGODB_URI` — MongoDB connection string (e.g. `mongodb://localhost:27017`)
+- `MONGODB_DB` — database name (default: `ecommerce`)
+- `GEMINI_API_KEY` — API key for Gemini / Google generative AI (leave blank if not using AI features)
+- `REDIS_URL` — Redis connection URL for caching (optional)
+- `CACHE_TTL` — cache TTL in seconds (optional)
+- `RATE_LIMIT` — requests per minute (optional)
+- `FLASK_ENV` — e.g. `development` or `production`
+- `FLASK_DEBUG` — `True`/`False`
+
+Security notes:
+
+- Never commit your `.env` file. Add `.env` to `.gitignore` before pushing. The included `.env.example` is safe to commit and shows required keys.
+- Remove any real API keys from repo history if they were accidentally committed (use tools like `git filter-repo` or rotate the keys).
+
+## Seeding data
+
+- Use the provided seed utilities to populate sample products:
+
+```powershell
+python run_seed.py
+# or POST to the API:
+# curl -X POST http://localhost:5000/api/seed
+```
+
+## AI Features
+
+- Natural language product search, AI-generated review summaries, and personalized recommendations are exposed under the API (see `/api/search/natural`, `/api/recommendations/<user_id>`, and review endpoints). Implementation references: `utils/ai_service.py` and `services/review_service.py`.
+
+## Key files
+
+- [app.py](app.py) — Flask application and API surface
+- [requirements.txt](requirements.txt) — Python dependencies
+- [package.json](package.json) — frontend dependencies and scripts
+- [run_seed.py](run_seed.py) — seed script for sample products
+- [services/search_service.py](services/search_service.py)
+- [services/recommendation_service.py](services/recommendation_service.py)
+- [services/review_service.py](services/review_service.py)
+- [utils/ai_service.py](utils/ai_service.py)
+- [app/layout.tsx](app/layout.tsx) — Next.js app layout
+- [app/page.tsx](app/page.tsx) — Next.js home page
+- [templates/index.html](templates/index.html) and other `templates/` pages for server-rendered views
+
+## Next steps
+
+- Run the backend and frontend locally, then open the site at `http://localhost:3000` (Next) or `http://localhost:5000` (Flask templates).
