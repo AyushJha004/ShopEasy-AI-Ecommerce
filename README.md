@@ -2,20 +2,49 @@
 
 ## Overview
 
-ShopEasy is a full-stack AI-powered e-commerce platform built using Flask, MongoDB, Next.js, and React. The application combines traditional online shopping functionality with Generative AI capabilities, enabling intelligent product discovery, personalized recommendations, and AI-driven customer assistance.
+ShopEasy is a full-stack AI-powered e-commerce platform built using Flask, MongoDB, Next.js, and React. The platform combines traditional online shopping functionality with Generative AI capabilities, enabling intelligent product discovery, personalized recommendations, AI-generated recommendation explanations, and review summarization using Google's Gemini API.
 
-The platform provides product catalog management, user authentication, shopping carts, order processing, product reviews, product comparison, and advanced AI-powered search features using Google's Gemini API.
+The application provides product catalog management, user authentication, shopping carts, order processing, product reviews, product comparison, and AI-enhanced search functionality through a modern responsive interface.
+
+---
 
 ## Key Features
 
 * AI-powered natural language product search
 * Personalized product recommendations
-* AI-generated review summarization
+* AI-generated recommendation explanations
+* AI-powered review summarization
 * Product comparison and analysis
 * User authentication and account management
 * Shopping cart and order management
-* Responsive modern UI built with Next.js and Tailwind CSS
+* Responsive UI built with Next.js and Tailwind CSS
 * RESTful backend APIs with Flask and MongoDB
+
+---
+
+## Application Screenshots
+
+### Login Page
+
+![Login](screenshots/login.png)
+
+### Product Catalog
+
+![Catalog](screenshots/catalog.png)
+
+### Product Details
+
+![Product Details](screenshots/product-details.png)
+
+### Shopping Cart
+
+![Cart](screenshots/cart.png)
+
+### Customer Reviews
+
+![Reviews](screenshots/reviews.png)
+
+---
 
 ## Tech Stack
 
@@ -37,23 +66,29 @@ The platform provides product catalog management, user authentication, shopping 
 ### AI & Machine Learning
 
 * Google Gemini API
-* Recommendation Engine
 * Natural Language Product Search
+* Recommendation Engine
 * Review Summarization
+
+---
 
 ## Architecture
 
-Frontend (Next.js + React)
-↓
-Flask REST API
-↓
+```text
+Next.js + React Frontend
+          ↓
+      Flask API
+          ↓
 MongoDB Database
-↓
-Gemini AI Services
+          ↓
+ Gemini AI Services
+```
 
-## Quick start (developer)
+---
 
-1. Create and activate a Python virtual environment, then install Python deps:
+## Quick Start
+
+### 1. Create Virtual Environment
 
 ```powershell
 python -m venv .venv
@@ -61,76 +96,141 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-2. Run backend (development):
+### 2. Run Backend
 
 ```powershell
 python app.py
-# Backend listens on http://localhost:5000 by default
 ```
 
-3. Install and run frontend (from project root):
+Backend runs on:
+
+```text
+http://localhost:5000
+```
+
+### 3. Run Frontend
 
 ```bash
 pnpm install
 pnpm dev
-# or with npm:
+```
+
+or
+
+```bash
 npm install
 npm run dev
-# Next dev server typically runs on http://localhost:3000
 ```
+
+Frontend runs on:
+
+```text
+http://localhost:3000
+```
+
+---
 
 ## Configuration
 
-This project uses a `.env` file to store runtime configuration (database URI, API keys, etc.). A `.env.example` with placeholders is included at the repo root — copy it and fill in real values before running:
+Create a local environment file:
 
 ```powershell
 copy .env.example .env
 ```
 
-Important environment variables (add these to your local `.env`):
+Configure:
 
-- `MONGODB_URI` — MongoDB connection string (e.g. `mongodb://localhost:27017`)
-- `MONGODB_DB` — database name (default: `ecommerce`)
-- `GEMINI_API_KEY` — API key for Gemini / Google generative AI (leave blank if not using AI features)
-- `REDIS_URL` — Redis connection URL for caching (optional)
-- `CACHE_TTL` — cache TTL in seconds (optional)
-- `RATE_LIMIT` — requests per minute (optional)
-- `FLASK_ENV` — e.g. `development` or `production`
-- `FLASK_DEBUG` — `True`/`False`
+```env
+MONGODB_URI=mongodb://localhost:27017
+MONGODB_DB=ecommerce
+GEMINI_API_KEY=your_gemini_api_key
+REDIS_URL=redis://localhost:6379
+CACHE_TTL=3600
+```
 
-Security notes:
+### Important Note
 
-- Never commit your `.env` file. Add `.env` to `.gitignore` before pushing. The included `.env.example` is safe to commit and shows required keys.
-- Remove any real API keys from repo history if they were accidentally committed (use tools like `git filter-repo` or rotate the keys).
+AI-powered search, recommendation explanations, and review summarization require a valid Gemini API key configured through the `GEMINI_API_KEY` environment variable.
 
-## Seeding data
+For security reasons, API keys are not included in this repository.
 
-- Use the provided seed utilities to populate sample products:
+---
+
+## Database Setup
+
+Populate sample products:
 
 ```powershell
 python run_seed.py
-# or POST to the API:
-# curl -X POST http://localhost:5000/api/seed
 ```
+
+or
+
+```bash
+curl -X POST http://localhost:5000/api/seed
+```
+
+---
 
 ## AI Features
 
-- Natural language product search, AI-generated review summaries, and personalized recommendations are exposed under the API (see `/api/search/natural`, `/api/recommendations/<user_id>`, and review endpoints). Implementation references: `utils/ai_service.py` and `services/review_service.py`.
+### Natural Language Search
 
-## Key files
+Example:
 
-- [app.py](app.py) — Flask application and API surface
-- [requirements.txt](requirements.txt) — Python dependencies
-- [package.json](package.json) — frontend dependencies and scripts
-- [run_seed.py](run_seed.py) — seed script for sample products
-- [services/search_service.py](services/search_service.py)
-- [services/recommendation_service.py](services/recommendation_service.py)
-- [services/review_service.py](services/review_service.py)
-- [utils/ai_service.py](utils/ai_service.py)
-- [app/layout.tsx](app/layout.tsx) — Next.js app layout
-- [app/page.tsx](app/page.tsx) — Next.js home page
-- [templates/index.html](templates/index.html) and other `templates/` pages for server-rendered views
+```text
+gaming laptop under 50000
+```
 
-## Next steps
+The query is processed using Gemini and converted into structured search filters before retrieving matching products from MongoDB.
 
-- Run the backend and frontend locally, then open the site at `http://localhost:3000` (Next) or `http://localhost:5000` (Flask templates).
+### Personalized Recommendations
+
+Recommendations are generated based on user interactions and purchase history, with Gemini providing human-readable recommendation explanations.
+
+### Review Summarization
+
+Customer reviews can be summarized using Gemini-powered text generation to provide concise product insights.
+
+---
+
+## Project Structure
+
+```text
+app.py
+services/
+├── search_service.py
+├── recommendation_service.py
+├── review_service.py
+
+utils/
+├── ai_service.py
+├── cache.py
+
+app/
+├── layout.tsx
+├── page.tsx
+
+templates/
+static/
+tests/
+```
+
+---
+
+## Security
+
+* `.env` is excluded from version control
+* API keys are stored using environment variables
+* `.env.example` provides safe configuration templates
+* Sensitive credentials should never be committed to GitHub
+
+---
+
+## Future Improvements
+
+* Conversational AI shopping assistant
+* Advanced recommendation algorithms
+* User behavior analytics
+* Multi-agent shopping workflows
+* Cloud deployment and monitoring
