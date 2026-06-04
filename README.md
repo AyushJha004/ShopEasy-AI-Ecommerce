@@ -1,14 +1,55 @@
-# Project Summary
+# ShopEasy – AI-Powered E-commerce Platform
 
-- **Overview:** Full-stack e-commerce application combining a Python/Flask backend with a modern Next.js React frontend. Provides product catalog, baskets, orders, user auth, product reviews, comparisons, and AI-powered search/recommendations.
+## Overview
+
+ShopEasy is a full-stack AI-powered e-commerce platform built using Flask, MongoDB, Next.js, and React. The application combines traditional online shopping functionality with Generative AI capabilities, enabling intelligent product discovery, personalized recommendations, and AI-driven customer assistance.
+
+The platform provides product catalog management, user authentication, shopping carts, order processing, product reviews, product comparison, and advanced AI-powered search features using Google's Gemini API.
+
+## Key Features
+
+* AI-powered natural language product search
+* Personalized product recommendations
+* AI-generated review summarization
+* Product comparison and analysis
+* User authentication and account management
+* Shopping cart and order management
+* Responsive modern UI built with Next.js and Tailwind CSS
+* RESTful backend APIs with Flask and MongoDB
 
 ## Tech Stack
 
-- **Backend:** Python, Flask
-- **Database:** MongoDB (pymongo)
-- **Data & Utilities:** numpy, redis, python-dotenv, requests
-- **AI / ML:** google-generativeai integration via `utils/ai_service.py`
-- **Frontend:** Next.js (React 19), TypeScript support, Tailwind CSS, Radix UI and other React libraries
+### Backend
+
+* Python
+* Flask
+* MongoDB (PyMongo)
+* Redis
+* REST APIs
+
+### Frontend
+
+* Next.js
+* React
+* TypeScript
+* Tailwind CSS
+
+### AI & Machine Learning
+
+* Google Gemini API
+* Recommendation Engine
+* Natural Language Product Search
+* Review Summarization
+
+## Architecture
+
+Frontend (Next.js + React)
+↓
+Flask REST API
+↓
+MongoDB Database
+↓
+Gemini AI Services
 
 ## Quick start (developer)
 
