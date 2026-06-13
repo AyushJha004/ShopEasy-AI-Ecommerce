@@ -234,3 +234,7 @@ tests/
 * User behavior analytics
 * Multi-agent shopping workflows
 * Cloud deployment and monitoring
+  
+## Live Demo
+
+https://shopeasy-ai-ecommerce.onrender.com
